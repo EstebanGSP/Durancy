@@ -8,7 +8,7 @@ const WhyRepairSection = () => {
         {/* Bloc 1 */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-snug">
+            <h2 className="text-2xl md:text-2xl font-bold mb-4 leading-snug">
               On vous apprend à faire des économies & gagner du temps
             </h2>
             <p className="text-white/90 leading-relaxed">
@@ -37,7 +37,7 @@ const WhyRepairSection = () => {
             />
           </div>
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-snug">
+            <h2 className="text-2xl md:text-2xl font-bold mb-4 leading-snug">
               Nos kits de réparation & tutoriels vous accompagnent
             </h2>
             <p className="text-white/90 leading-relaxed">

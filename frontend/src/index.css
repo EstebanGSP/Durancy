@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+      @apply font-sans;
+    }
+  }
+
+
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+  

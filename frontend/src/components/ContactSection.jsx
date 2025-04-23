@@ -18,22 +18,22 @@ const ContactSection = () => {
         </h2>
         <p className="text-gray-300 mb-8">Nous répondons sous 48h</p>
 
-        <div className="mb-8 flex justify-center space-x-4">
+        <div className="mb-8 flex flex-col md:flex-row justify-center items-center gap-4">
           <button
-            className={`px-6 py-2 rounded ${
+            className={`px-10 py-2 w-full md:w-auto ${
               role === 'Particulier'
-                ? 'bg-white text-black'
-                : 'bg-transparent border border-white text-white'
+                ? 'bg-white text-black rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
+                : 'bg-transparent border-[2.5px] border-white text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
             }`}
             onClick={() => setRole('Particulier')}
           >
             Particulier
           </button>
           <button
-            className={`px-6 py-2 rounded ${
+            className={`px-10 py-2 w-full md:w-auto ${
               role === 'Professionnel'
-                ? 'bg-white text-black'
-                : 'bg-transparent border border-white text-white'
+                ? 'bg-white text-black rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
+                : 'bg-transparent border-[2.5px] border-white text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
             }`}
             onClick={() => setRole('Professionnel')}
           >
@@ -41,40 +41,47 @@ const ContactSection = () => {
           </button>
         </div>
 
+
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
               placeholder="Nom:"
-              className="p-3 rounded border w-full bg-transparent border-white text-white placeholder-white"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
             />
             <input
               type="text"
               placeholder="Prénom:"
-              className="p-3 rounded border w-full bg-transparent border-white text-white placeholder-white"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
             />
             <input
               type="email"
               placeholder="Email:"
-              className="p-3 rounded border w-full bg-transparent border-white text-white placeholder-white"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
             />
             <input
               type="tel"
               placeholder="Mobile:"
-              className="p-3 rounded border w-full bg-transparent border-white text-white placeholder-white"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
             />
           </div>
 
           <textarea
             placeholder="Votre message :"
             rows="4"
-            className="w-full p-3 border border-white rounded bg-transparent text-white placeholder-white"
+            className="w-full p-3 border-[2.5px] border-white bg-transparent text-white placeholder-white 
+              rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
           />
 
-          <div className="text-center">
+          <div className="flex justify-end mt-6">
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-600 to-purple-400 text-white px-6 py-3 rounded hover:opacity-90 transition"
+              className="bg-gradient-to-r from-violetStart to-violetEnd text-white px-20 py-2 
+              rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none hover:opacity-90 transition"
             >
               Envoyez votre message
             </button>
