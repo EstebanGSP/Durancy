@@ -18,24 +18,23 @@ const ContactSection = () => {
         </h2>
         <p className="text-gray-300 mb-8">Nous répondons sous 48h</p>
 
-        {/* Boutons de rôle */}
         <div className="mb-8 flex flex-col md:flex-row justify-center items-center gap-4">
           <button
-            className={`px-10 py-2 w-full md:w-auto
-              ${role === 'Particulier'
-                ? 'bg-[#9B59B6] text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
+            className={`px-10 py-2 w-full md:w-auto ${
+              role === 'Particulier'
+                ? 'bg-white text-black rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
                 : 'bg-transparent border-[2.5px] border-white text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
-              }`}
+            }`}
             onClick={() => setRole('Particulier')}
           >
             Particulier
           </button>
           <button
-            className={`px-10 py-2 w-full md:w-auto
-              ${role === 'Professionnel'
-                ? 'bg-[#9B59B6] text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
-                : 'bg-transparent border-[2.5px] text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
-              }`}
+            className={`px-10 py-2 w-full md:w-auto ${
+              role === 'Professionnel'
+                ? 'bg-white text-black rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
+                : 'bg-transparent border-[2.5px] border-white text-white rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none'
+            }`}
             onClick={() => setRole('Professionnel')}
           >
             Professionnel
@@ -43,36 +42,46 @@ const ContactSection = () => {
         </div>
 
 
-        {/* Formulaire */}
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {["Nom:", "Prénom:", "Email:", "Mobile:"].map((placeholder, idx) => (
-              <input
-                key={idx}
-                type="text"
-                placeholder={placeholder}
-                className="p-3 w-full bg-transparent border-[2.5px] border-white text-white placeholder-white 
-                  rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none
-                  transition-all duration-300 
-                  focus:outline-none focus:border-[#9B59B6] focus:placeholder-transparent"
-              />
-            ))}
+            <input
+              type="text"
+              placeholder="Nom:"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
+            />
+            <input
+              type="text"
+              placeholder="Prénom:"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
+            />
+            <input
+              type="email"
+              placeholder="Email:"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
+            />
+            <input
+              type="tel"
+              placeholder="Mobile:"
+              className="p-3 border-[2.5px] w-full bg-transparent border-white text-white placeholder-white 
+                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
+            />
           </div>
 
           <textarea
             placeholder="Votre message :"
             rows="4"
-            className="p-3 w-full bg-transparent border-[2.5px] border-white text-white placeholder-white 
-              rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none
-              transition-all duration-300 
-              focus:outline-none focus:border-[#9B59B6] focus:placeholder-transparent"
+            className="w-full p-3 border-[2.5px] border-white bg-transparent text-white placeholder-white 
+              rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none"
           />
 
           <div className="flex justify-end mt-6">
             <button
               type="submit"
               className="bg-gradient-to-r from-violetStart to-violetEnd text-white px-20 py-2 
-                rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none hover:opacity-90 transition"
+              rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none hover:opacity-90 transition"
             >
               Envoyez votre message
             </button>
