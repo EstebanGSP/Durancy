@@ -16,18 +16,22 @@ const HeroSection = () => {
           {/* Boutons */}
           <div className="flex justify-center gap-4 flex-wrap mt-6">
             {/* Bouton Tutoriels */}
-            <button className="w-48 bg-gradient-to-r from-violetPurpleStart to-violetEnd text-white font-medium 
-              py-2 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] rounded-tl-none 
-              shadow-md hover:opacity-90 transition-all">
-              Tutoriels
-            </button>
+            <a>
+              <button className="w-48 bg-gradient-to-r from-violetPurpleStart to-violetEnd text-white font-medium 
+                py-2 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] rounded-tl-none 
+                shadow-md hover:opacity-90 transition-all">
+                Tutoriels
+              </button>
+            </a>
 
             {/* Bouton Réparation */}
-            <button className="w-48 border-[2.5px] border-black text-black font-medium 
-              py-2 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] rounded-tl-none 
-              hover:bg-black hover:text-white transition-all">
-              Réparation
-            </button>
+            <a>
+              <button className="w-48 border-[2.5px] border-black text-black font-medium 
+                py-2 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] rounded-tl-none 
+                hover:bg-black hover:text-white transition-all">
+                Réparation
+              </button>
+            </a>
           </div>
         </div>
 
