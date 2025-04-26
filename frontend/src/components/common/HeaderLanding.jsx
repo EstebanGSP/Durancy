@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <header className="bg-white">
@@ -8,6 +10,16 @@ const Navbar = () => {
             <img src="/images/logo-durancy.png" alt="Logo Durancy" className="h-10" />
           </a>
         </div>
+
+        {/* Bouton Accéder au site */}
+        <div className="mt-4 md:mt-0">
+          <Link
+            to="/home"
+            className="inline-block bg-purple-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-purple-700 transition"
+          >
+            Voir l'avancement du site
+          </Link>
+        </div>
       </div>
 
       {/* Bande violette */}
@@ -16,6 +28,4 @@ const Navbar = () => {
   );
 };
 
-  
-  export default Navbar;
-  
+export default Navbar;

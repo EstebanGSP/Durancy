@@ -1,22 +1,17 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import WhyRepairSection from './components/WhyRepairSection';
-import WhyChooseUs from './components/WhyChooseUs';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage.jsx';
+import HomePage from './pages/HomePage.jsx';
 
 function App() {
   return (
-    <div className="font-sans">
-      <Navbar />
-      <HeroSection />
-      <WhyRepairSection />
-      <WhyChooseUs />
-      <ContactSection />
-      <Footer />
-    </div>
+    <Router>
+      <div className="font-sans">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
