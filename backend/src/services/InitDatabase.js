@@ -1,14 +1,22 @@
-const User = require('../models/User');
-const Kit = require('../models/Kit');
+const { sequelize } = require('./ConnexionDB');
 
-async function initDatabase() {
+require('../models/User');
+require('../models/Kit');
+require('../models/Order');
+require('../models/OrderKit');
+require('../models/Review');
+require('../models/Tutorial');
+require('../models/Faq');
+
+let tablesAlreadySynced = false; 
+async function createTables() {
+  if (tablesAlreadySynced) return; 
   try {
-    await User.sync();
-    await Kit.sync(); 
-    console.log('✅ Tables synchronisées avec succès');
+    await sequelize.sync(); 
+    tablesAlreadySynced = true;
   } catch (error) {
-    console.error('❌ Erreur lors de la synchronisation des tables :', error);
+    console.error('❌ Erreur lors de la création des tables :', error);
   }
 }
 
-module.exports = initDatabase;
+module.exports = createTables;

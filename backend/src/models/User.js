@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB'); // ← ici on récupère sequelize
+const { sequelize } = require('../services/ConnexionDB'); 
 
 const User = sequelize.define('User', {
   username: {
@@ -32,6 +32,10 @@ const User = sequelize.define('User', {
     allowNull: false,
     defaultValue: 'client'
   },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   nb_free_repairs: {
     type: DataTypes.INTEGER,
     defaultValue: 0
@@ -42,7 +46,8 @@ const User = sequelize.define('User', {
   }
 }, {
   tableName: 'users',
-  timestamps: true
+  timestamps: true,
+  underscored: true
 });
 
 module.exports = User;

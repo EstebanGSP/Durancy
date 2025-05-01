@@ -1,26 +1,27 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../services/ConnexionDB'); 
-const Tutorial = sequelize.define('Tutorial', {
-  title: {
-    type: DataTypes.STRING,
+
+const Review = sequelize.define('Review', {
+  tutorial_id: {
+    type: DataTypes.BIGINT,
     allowNull: false
   },
-  video_url: {
-    type: DataTypes.STRING,
+  user_id: {
+    type: DataTypes.BIGINT,
     allowNull: false
   },
-  description: {
+  content: {
     type: DataTypes.TEXT,
     allowNull: true
   },
-  kit_id: {
+  rating: {
     type: DataTypes.BIGINT,
     allowNull: false
   }
 }, {
-  tableName: 'tutorials',
+  tableName: 'reviews',
   timestamps: true,
   underscored: true
 });
 
-module.exports = Tutorial;
+module.exports = Review;
