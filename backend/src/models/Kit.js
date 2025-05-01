@@ -1,13 +1,12 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB');
-
+const { sequelize } = require('../services/ConnexionDB'); 
 const Kit = sequelize.define('Kit', {
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
   description: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: true
   },
   price: {
@@ -15,7 +14,7 @@ const Kit = sequelize.define('Kit', {
     allowNull: false
   },
   stock: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
     allowNull: false,
     defaultValue: 0
   },
@@ -25,7 +24,8 @@ const Kit = sequelize.define('Kit', {
   }
 }, {
   tableName: 'kits',
-  timestamps: true // pour createdAt et updatedAt
+  timestamps: true,
+  underscored: true
 });
 
 module.exports = Kit;
