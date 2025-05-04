@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
   }
 );
 
-// Fonction qui teste la connexion
+
 async function connectDatabase() {
   try {
     await sequelize.authenticate();

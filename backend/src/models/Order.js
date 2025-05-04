@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB'); 
+const { sequelize } = require('../services/ConnexionDB');
 
 const Order = sequelize.define('Order', {
   date_order: {

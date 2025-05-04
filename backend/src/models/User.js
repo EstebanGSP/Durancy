@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB'); 
+const { DataTypes, Model } = require('sequelize');
+const { sequelize } = require('../services/ConnexionDB');
 
-const User = sequelize.define('User', {
+class User extends Model {}
+
+User.init({
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -9,11 +11,11 @@ const User = sequelize.define('User', {
   },
   firstname: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   lastname: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   email: {
     type: DataTypes.STRING,
@@ -30,7 +32,10 @@ const User = sequelize.define('User', {
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'client'
+    defaultValue: 'client',
+    validate: {
+      isIn: [['client', 'admin', 'partenaire']]
+    }
   },
   address: {
     type: DataTypes.STRING,
@@ -45,6 +50,8 @@ const User = sequelize.define('User', {
     allowNull: true
   }
 }, {
+  sequelize,
+  modelName: 'User',
   tableName: 'users',
   timestamps: true,
   underscored: true

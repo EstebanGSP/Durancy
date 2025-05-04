@@ -1,6 +1,9 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB'); 
-const Kit = sequelize.define('Kit', {
+const { DataTypes, Model } = require('sequelize');
+const { sequelize } = require('../services/ConnexionDB');
+
+class Kit extends Model {}
+
+Kit.init({
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -23,6 +26,8 @@ const Kit = sequelize.define('Kit', {
     allowNull: true
   }
 }, {
+  sequelize,
+  modelName: 'Kit',
   tableName: 'kits',
   timestamps: true,
   underscored: true

@@ -1,14 +1,16 @@
 const { connectDatabase } = require('./services/ConnexionDB');
 const startServer = require('./services/Serveur');
-const createTables = require('./services/InitDatabase'); // ← très important
+const createTables = require('./services/InitDatabase');
+const setupAssociations = require('./models/associations');
 
 async function main() {
   try {
     await connectDatabase();
-    await createTables(); // ← OBLIGATOIRE pour créer les tables
-    startServer(3030);
+    setupAssociations();
+    await createTables();
+    startServer(3000);
   } catch (error) {
-    console.error("❌ Erreur au démarrage :", error);
+    console.error("Erreur lors du démarrage de l'application :", error);
   }
 }
 

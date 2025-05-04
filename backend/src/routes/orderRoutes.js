@@ -1,10 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const OrderController = require('../controllers/OrdersController');
+const orderController = require('../controllers/orderController');
+const { verifyToken, isAdmin } = require('../middlewares/auth');
 
-router.post('/orders', OrderController.createOrder);
-router.get('/orders/:userId', OrderController.getOrdersByUser);
-router.get('/orders', OrderController.getAllOrders);
-router.delete('/orders/:id', OrderController.deleteOrder); // Suppression par admin
+// Créer une commande (user connecté)
+router.post('/', verifyToken, orderController.create);
+
+//  Supprimer une commande (admin uniquement)
+router.delete('/:id', verifyToken, isAdmin, orderController.delete);
+
+//  Annuler une commande (admin uniquement)
+router.patch('/:id/cancel', verifyToken, isAdmin, orderController.cancel);
+//  Voir toutes les commandes (admin uniquement)
+router.get('/', verifyToken, isAdmin, orderController.getAll);
+// 👤 Voir les commandes de l'utilisateur connecté (client)
+router.get('/me', verifyToken, orderController.getMyOrders);
+
+router.get('/:id', verifyToken, orderController.getByIdSecure); 
+
+
+
+
 
 module.exports = router;

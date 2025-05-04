@@ -1,11 +1,13 @@
+// src/routes/kitRoutes.js
 const express = require('express');
 const router = express.Router();
-const KitController = require('../controllers/KitsController');
+const KitController = require('../controllers/kitController');
+const { verifyToken, isAdmin } = require('../middlewares/auth');
 
-router.get('/kits', KitController.getAllKits);
-router.get('/kits/:id', KitController.getKitById);
-router.post('/kits', KitController.createKit);
-router.put('/kits/:id', KitController.updateKit);
-router.delete('/kits/:id', KitController.deleteKit);
+router.post('/', verifyToken, isAdmin, KitController.create);
+router.put('/:id', verifyToken, isAdmin, KitController.update);
+router.delete('/:id', verifyToken, isAdmin, KitController.delete);
+router.get('/', KitController.getAll);
+router.get('/:id', KitController.getById);
 
 module.exports = router;
