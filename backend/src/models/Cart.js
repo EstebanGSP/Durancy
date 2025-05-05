@@ -1,24 +1,11 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../services/ConnexionDB');
+const { DataTypes, Model } = require('sequelize');
+const { sequelize } = require('../services/ConnexionDB'); 
 
-const Cart = sequelize.define('Cart', {
-  user_id: {
-    type: DataTypes.INTEGER, // ✅ même type que User.id
-    allowNull: false
-  },
-  kit_id: {
-    type: DataTypes.INTEGER, // ✅ même type que Kit.id
-    allowNull: false
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 1
-  }
-}, {
-  tableName: 'carts',
-  timestamps: true,
-  underscored: true
-});
+class Cart extends Model {}
+
+Cart.init({
+  user_id: { type: DataTypes.INTEGER, allowNull: false },
+  status: { type: DataTypes.STRING, defaultValue: 'en cours' }, // ou "validé"
+}, { sequelize, modelName: 'Cart' });
 
 module.exports = Cart;

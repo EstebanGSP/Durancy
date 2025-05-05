@@ -24,6 +24,10 @@ Kit.init({
   category: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  image: { // 🖼️ Ajout ici
+    type: DataTypes.STRING,
+    allowNull: true // facultatif
   }
 }, {
   sequelize,

@@ -83,3 +83,46 @@ Vous trouverez ci-dessous un récapitulatif des **routes** disponibles pour le f
 
 
 
+🛒 API – Gérer le panier
+
+Toutes les routes nécessitent un token (Authorization: Bearer ...)
+➕ Ajouter un kit
+
+POST /api/panier/ajouter
+
+{
+  "kit_id": 5,
+  "quantity": 2
+}
+
+👁 Voir le panier
+
+GET /api/panier
+✏️ Modifier la quantité
+
+PUT /api/panier/modifier
+
+{
+  "kit_id": 5,
+  "quantity": 3
+}
+
+❌ Supprimer un kit
+
+DELETE /api/panier/supprimer
+
+{
+  "kit_id": 5
+}
+
+🧹 Vider tout le panier
+
+DELETE /api/panier/vider
+✅ Valider le panier (créer commande)
+
+POST /api/panier/valider
+
+{
+  "delivery_fee": 4.99 
+}
+
