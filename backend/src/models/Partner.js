@@ -22,7 +22,7 @@ const Partner = sequelize.define('Partner', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users', // correspond à la table Users
+      model: 'users', 
       key: 'id'
     },
     onDelete: 'CASCADE'

@@ -1,4 +1,6 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('../docs/config.js'); 
 
 // Routes
 const userRoutes = require('../routes/userRoutes'); 
@@ -16,6 +18,8 @@ function startServer(port) {
   app.get('/', (req, res) => {
     res.send('🎉 API Durancy en ligne !');
   });
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   // Ajout des routes principales
   app.use('/users', userRoutes);
