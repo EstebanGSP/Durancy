@@ -16,7 +16,7 @@ function startServer(port) {
 
   // Route de test simple
   app.get('/', (req, res) => {
-    res.send('🎉 API Durancy en ligne !');
+    res.send('API Durancy en ligne !');
   });
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -27,9 +27,9 @@ function startServer(port) {
   app.use('/orders', orderRoutes);
   app.use('/api', cartRoutes);
 
-  // 🚀 Lancement du serveur
+  // Lancement du serveur
   app.listen(port, () => {
-    console.log(`✅ Serveur lancé sur http://localhost:${port}`);
+    console.log(`Serveur lancé sur http://localhost:${port}`);
   });
 }
 

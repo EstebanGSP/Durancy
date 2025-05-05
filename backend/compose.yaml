@@ -1,0 +1,51 @@
+services:
+  node:
+    image: node:lts-slim
+    working_dir: /src
+    env_file:
+      - .env
+    command: /bin/sh -c 'npm install && npm run dev'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/src
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:lts
+    restart: always
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      timeout: 30s
+    environment:
+      MYSQL_DATABASE: durancy
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpass123
+      MARIADB_ROOT_PASSWORD: rootpass123
+    volumes:
+      - ./db:/var/lib/mysql
+  
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8081:80'
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+      PMA_ARBITRARY: 1
+

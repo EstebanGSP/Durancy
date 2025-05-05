@@ -4,7 +4,14 @@ node_modules/
 # Builds
 frontend/build/
 backend/node_modules/
-.env
+
+*/.env
+
+
+
+/*/node_modules/
 
 # Logs
 *.log
+
+/*/db

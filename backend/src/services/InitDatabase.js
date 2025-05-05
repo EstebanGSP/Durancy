@@ -22,9 +22,9 @@ async function createTables() {
   try {
     await sequelize.sync();
     tablesAlreadySynced = true;
-    console.log('✅ Tables synchronisées avec succès');
+    console.log('Tables synchronisées avec succès');
   } catch (error) {
-    console.error('❌ Erreur lors de la création des tables :', error);
+    console.error('Erreur lors de la création des tables :', error);
   }
 }
 
