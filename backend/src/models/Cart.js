@@ -5,7 +5,7 @@ class Cart extends Model {}
 
 Cart.init({
   user_id: { type: DataTypes.INTEGER, allowNull: false },
-  status: { type: DataTypes.STRING, defaultValue: 'en cours' }, // ou "validé"
+  status: { type: DataTypes.STRING, defaultValue: 'en cours' }, 
 }, { sequelize, modelName: 'Cart' });
 
 module.exports = Cart;

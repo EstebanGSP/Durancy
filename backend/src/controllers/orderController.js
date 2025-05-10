@@ -44,7 +44,7 @@ const orderController = {
       res.status(500).json({ error: "Erreur lors de la création de la commande : " + error.message });
     }
   },
-  // 🔥 Supprimer une commande
+  // Supprimer une commande
   async delete(req, res) {
     try {
       const { id } = req.params;
@@ -65,7 +65,7 @@ const orderController = {
     }
   },
 
-  // 🚫 Annuler une commande (changer le statut)
+  // Annuler une commande (changer le statut)
   async cancel(req, res) {
     try {
       const { id } = req.params;

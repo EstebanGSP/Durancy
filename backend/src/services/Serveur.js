@@ -7,6 +7,10 @@ const userRoutes = require('../routes/userRoutes');
 const kitRoutes = require('../routes/kitRoutes');
 const orderRoutes = require('../routes/orderRoutes');
 const cartRoutes = require('../routes/cartRoutes');
+const reviewRoutes = require('../routes/reviewRoutes');
+const faqRoutes = require('../routes/faqRoutes');
+
+
 
 function startServer(port) {
   const app = express();
@@ -26,6 +30,10 @@ function startServer(port) {
   app.use('/kits', kitRoutes);
   app.use('/orders', orderRoutes);
   app.use('/api', cartRoutes);
+  app.use('/reviews', reviewRoutes);
+  app.use('/faq', faqRoutes);
+
+
 
   // Lancement du serveur
   app.listen(port, () => {
