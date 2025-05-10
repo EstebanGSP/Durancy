@@ -14,7 +14,11 @@
  *     responses:
  *       200:
  *         description: Liste des FAQs
- *
+ */
+
+/**
+ * @swagger
+ * /faq:
  *   post:
  *     summary: Ajouter une nouvelle question (admin)
  *     tags: [FAQ]
@@ -36,7 +40,10 @@
  *     responses:
  *       201:
  *         description: FAQ créée
- *
+ */
+
+/**
+ * @swagger
  * /faq/{id}:
  *   put:
  *     summary: Modifier une réponse existante (admin)
@@ -61,7 +68,11 @@
  *     responses:
  *       200:
  *         description: Réponse mise à jour
- *
+ */
+
+/**
+ * @swagger
+ * /faq/{id}:
  *   delete:
  *     summary: Supprimer une question (admin)
  *     tags: [FAQ]

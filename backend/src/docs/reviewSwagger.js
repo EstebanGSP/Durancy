@@ -1,12 +1,3 @@
-// src/docs/reviewSwagger.js
-
-/**
- * @swagger
- * tags:
- *   name: Reviews
- *   description: Gestion des avis utilisateurs
- */
-
 /**
  * @swagger
  * /reviews:
@@ -18,7 +9,10 @@
  *     responses:
  *       200:
  *         description: Liste des avis
- *
+ */
+
+/**
+ * @swagger
  * /reviews/tutorial/{tutorial_id}:
  *   get:
  *     summary: Récupérer les avis d’un tutoriel
@@ -32,7 +26,10 @@
  *     responses:
  *       200:
  *         description: Liste des avis pour le tutoriel donné
- *
+ */
+
+/**
+ * @swagger
  * /reviews:
  *   post:
  *     summary: Ajouter un avis
@@ -58,7 +55,10 @@
  *     responses:
  *       201:
  *         description: Avis ajouté
- *
+ */
+
+/**
+ * @swagger
  * /reviews/{id}:
  *   delete:
  *     summary: Supprimer un avis (admin)
@@ -74,7 +74,10 @@
  *     responses:
  *       200:
  *         description: Avis supprimé
- *
+ */
+
+/**
+ * @swagger
  * /reviews/top/best:
  *   get:
  *     summary: Récupérer les meilleurs avis (note = 5)
