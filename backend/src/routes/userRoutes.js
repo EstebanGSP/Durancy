@@ -6,6 +6,8 @@ const { verifyToken, isAdmin } = require('../middlewares/auth');
 // Routes publiques
 router.post('/register', userController.register);
 router.post('/login', userController.login);
+router.post('/forgot-password', userController.forgotPassword);
+
 
 // Routes privées (utilisateur connecté ou admin)
 router.get('/me', verifyToken, userController.getMe);

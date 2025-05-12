@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Partner = require('../models/Partner');
+const sendMail = require('../utils/mailer');
 
 class UserController {
   async register(req, res) {
@@ -166,6 +167,36 @@ class UserController {
       res.status(200).json({ message: 'Votre compte a bien été supprimé.' });
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la suppression : ' + error.message });
+    }
+  }
+  
+  async forgotPassword(req, res) {
+    try {
+      const { email } = req.body;
+
+      if (!email) return res.status(400).json({ error: "Email requis" });
+
+      const user = await User.findOne({ where: { email } });
+      if (!user) return res.status(404).json({ error: "Utilisateur non trouvé" });
+
+      // Générer mot de passe temporaire
+      const tempPassword = Math.random().toString(36).slice(-10); // ex: "x7e9k2mpa4"
+      const hashed = await bcrypt.hash(tempPassword, 10);
+
+      // Mise à jour en BDD
+      user.password = hashed;
+      await user.save();
+
+      // Envoi du mail
+      await sendMail(
+        email,
+        "Nouveau mot de passe temporaire - Durancy",
+        `Bonjour, voici votre nouveau mot de passe temporaire : ${tempPassword}`
+      );
+
+      res.status(200).json({ message: "Mot de passe temporaire envoyé par email." });
+    } catch (error) {
+      res.status(500).json({ error: "Erreur serveur : " + error.message });
     }
   }
 }
