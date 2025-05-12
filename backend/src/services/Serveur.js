@@ -9,6 +9,7 @@ const orderRoutes = require('../routes/orderRoutes');
 const cartRoutes = require('../routes/cartRoutes');
 const reviewRoutes = require('../routes/reviewRoutes');
 const faqRoutes = require('../routes/faqRoutes');
+const tutorialRoutes = require('./routes/tutorialRoutes');
 
 
 
@@ -32,7 +33,7 @@ function startServer(port) {
   app.use('/api', cartRoutes);
   app.use('/reviews', reviewRoutes);
   app.use('/faq', faqRoutes);
-
+  app.use('/tutorials', tutorialRoutes);
 
 
   // Lancement du serveur

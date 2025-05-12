@@ -48,19 +48,25 @@ class KitController {
     }
   }
 
-  async getAll(req, res) {
-    try {
-      const kits = await Kit.findAll();
-      res.status(200).json(kits);
-    } catch (error) {
-      res.status(500).json({ error: "Erreur serveur : " + error.message });
-    }
+async getAll(req, res) {
+  try {
+    const kits = await Kit.findAll({
+      include: {
+        model: Tutorial,
+        attributes: ['id', 'title', 'video_url', 'description']
+      }
+    });
+    res.status(200).json(kits);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur : " + error.message });
   }
+}
+
   async getById(req, res) {
     try {
       const kit = await Kit.findByPk(req.params.id, {
         include: {
-          model: Tutorial, // 🔗 Inclure le tutoriel lié
+          model: Tutorial, 
           attributes: ['id', 'title', 'video_url', 'description']
         }
       });
