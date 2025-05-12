@@ -8,20 +8,39 @@ const RegisterPage = () => {
     <>
       <Header />
 
-      <main className="max-w-5xl mx-auto px-4 pt-32 pb-16">
-        <div className="bg-gray-100 rounded-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-          {/* Formulaire */}
-          <div className="p-8">
-            <h1 className="text-2xl font-bold mb-6">S’inscrire</h1>
+      <main className="max-w-6xl mx-auto px-4 pt-32 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden border border-purple-300">
+          {/* Partie gauche : formulaire sur fond violet */}
+          <div className="bg-[#9B59B6] text-white p-10 flex flex-col justify-center">
+            <h1 className="text-3xl font-bold mb-6 text-center">S’inscrire</h1>
             <RegisterForm />
+            <p className="text-xs text-center mt-6">
+              En cliquant sur le bouton S’inscrire, vous acceptez nos{" "}
+              <a href="#" className="underline">
+                conditions d’utilisation
+              </a>{" "}
+              et notre{" "}
+              <a href="#" className="underline">
+                politique de confidentialité
+              </a>
+            </p>
           </div>
 
-          {/* Bloc visuel */}
-          <div className="hidden md:flex items-center justify-center bg-white">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold text-gray-600">Bienvenue chez</h2>
-              <p className="text-2xl font-bold text-gray-800 mt-1">Durancy</p>
-            </div>
+          {/* Partie droite : illustration */}
+          <div className="hidden md:flex items-center justify-center bg-white relative">
+            {/* Éclair décoratif centré au-dessus */}
+            <img
+              src="/images/minieclairs.png"
+              alt="Éclair décoratif"
+              className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none"
+            />
+
+            {/* Personnage */}
+            <img
+              src="/images/worker.png"
+              alt="Réparateur Durancy"
+              className="ml-16 max-w-xs z-10"
+            />
           </div>
         </div>
       </main>

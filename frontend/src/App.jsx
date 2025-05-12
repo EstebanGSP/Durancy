@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import EmailConfirmationPage from "./pages/EmailConfirmationPage.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/inscription" element={<RegisterPage />} />
           <Route path="/confirmation" element={<EmailConfirmationPage />} />
           <Route path="/compte" element={<AccountPage />} />
+          <Route path="/panier" element={<CartPage />} />
         </Routes>
       </div>
     </Router>

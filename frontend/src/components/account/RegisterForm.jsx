@@ -19,12 +19,11 @@ const RegisterForm = () => {
       alert("Les mots de passe ne correspondent pas.");
       return;
     }
-    // TODO: intégrer backend d'inscription
     alert("Inscription simulée !");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-8 max-w-md mx-auto w-full">
       <input
         type="text"
         name="firstName"
@@ -32,7 +31,7 @@ const RegisterForm = () => {
         value={formData.firstName}
         onChange={handleChange}
         required
-        className="w-full border p-2 rounded"
+        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616]"
       />
       <input
         type="text"
@@ -41,7 +40,7 @@ const RegisterForm = () => {
         value={formData.lastName}
         onChange={handleChange}
         required
-        className="w-full border p-2 rounded"
+        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616]" 
       />
       <input
         type="password"
@@ -50,7 +49,7 @@ const RegisterForm = () => {
         value={formData.password}
         onChange={handleChange}
         required
-        className="w-full border p-2 rounded"
+        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616] mb-2"
       />
       <input
         type="password"
@@ -59,23 +58,12 @@ const RegisterForm = () => {
         value={formData.confirmPassword}
         onChange={handleChange}
         required
-        className="w-full border p-2 rounded"
+        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616] mb-2"
       />
-
-      <p className="text-xs text-gray-600">
-        En cliquant sur le bouton s’inscrire, vous acceptez nos{" "}
-        <a href="#" className="underline">
-          conditions d’utilisation
-        </a>{" "}
-        et notre{" "}
-        <a href="#" className="underline">
-          politique de confidentialité
-        </a>.
-      </p>
 
       <button
         type="submit"
-        className="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-800 transition"
+        className="w-full bg-white text-[#161616] font-bold py-4 rounded shadow hover:bg-gray-100 transition"
       >
         S’inscrire
       </button>
