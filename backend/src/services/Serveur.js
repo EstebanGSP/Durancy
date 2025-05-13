@@ -9,7 +9,7 @@ const orderRoutes = require('../routes/orderRoutes');
 const cartRoutes = require('../routes/cartRoutes');
 const reviewRoutes = require('../routes/reviewRoutes');
 const faqRoutes = require('../routes/faqRoutes');
-const tutorialRoutes = require('./routes/tutorialRoutes');
+const tutorialRoutes = require('../routes/tutorialRoutes.js');
 
 
 

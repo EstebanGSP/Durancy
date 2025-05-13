@@ -137,27 +137,29 @@ class UserController {
     }
   }
 
-  async updateMe(req, res) {
-    try {
-      const user = await User.findByPk(req.user.id);
-      if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé.' });
+async updateMe(req, res) {
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé.' });
 
-      const { firstname, lastname, password, profile_pic } = req.body;
+    const { firstname, lastname, email, password, profile_pic } = req.body;
 
-      if (user.role === 'client') {
-        if (firstname) user.firstname = firstname;
-        if (lastname) user.lastname = lastname;
-      }
-
-      if (profile_pic) user.profile_pic = profile_pic;
-      if (password) user.password = await bcrypt.hash(password, 10);
-
-      await user.save();
-      res.status(200).json({ message: 'Compte mis à jour avec succès.', user });
-    } catch (error) {
-      res.status(500).json({ error: 'Erreur lors de la mise à jour : ' + error.message });
+    if (user.role === 'client') {
+      if (firstname) user.firstname = firstname;
+      if (lastname) user.lastname = lastname;
+      if (email) user.email = email;
     }
+
+    if (profile_pic) user.profile_pic = profile_pic;
+    if (password) user.password = await bcrypt.hash(password, 10);
+
+    await user.save();
+    res.status(200).json({ message: 'Compte mis à jour avec succès.', user });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la mise à jour : ' + error.message });
   }
+}
+
 
   async deleteMe(req, res) {
     try {

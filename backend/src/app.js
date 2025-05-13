@@ -1,12 +1,12 @@
 const { connectDatabase } = require('./services/ConnexionDB');
 const startServer = require('./services/Serveur');
 const createTables = require('./services/InitDatabase');
-const setupAssociations = require('./models/associations');
+const AssociationManager = require('./models/associations');
 
 async function main() {
   try {
     await connectDatabase();
-    setupAssociations();
+    AssociationManager.setup();
     await createTables();
     startServer(3000);
   } catch (error) {
