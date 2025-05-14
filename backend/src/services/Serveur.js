@@ -21,7 +21,7 @@ function startServer(port) {
 
   // Route de test simple
   app.get('/', (req, res) => {
-    res.send('API Durancy en ligne !');
+    res.send('API Durancy Melissa en ligne !');
   });
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

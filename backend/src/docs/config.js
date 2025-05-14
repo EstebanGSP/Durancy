@@ -4,7 +4,7 @@ const options = {
     definition: {
         openapi: "3.1.0",
         info: {
-            title: "DurancyApi333",
+            title: "DurancyApi",
             version: "0.1.0",
             description:
                 "This is a simple CRUD API application made with Express and documented with Swagger",
@@ -20,7 +20,8 @@ const options = {
         ],
     },
     
-    apis: ["./docs/*.js"],
+    apis: ["./routes/**/*.js", "./controllers/**/*.js", "./docs/**/*.js"]
+
   };
 
 
