@@ -22,13 +22,20 @@ class UserController {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      // ✅ Si une image est envoyée, on enregistre son URL
+      let profile_pic = null;
+      if (req.file) {
+        profile_pic = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+      }
+
       const userData = {
         username,
         email,
         password: hashedPassword,
         role,
         firstname: role === 'client' ? firstname : null,
-        lastname: role === 'client' ? lastname : null
+        lastname: role === 'client' ? lastname : null,
+        profile_pic
       };
 
       const newUser = await User.create(userData);
@@ -48,7 +55,6 @@ class UserController {
       res.status(500).json({ error: 'Erreur serveur : ' + error.message });
     }
   }
-
   async login(req, res) {
     try {
       const { email, password } = req.body;

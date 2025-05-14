@@ -2,3 +2,13 @@
   "email": "tonadresse@gmail.com",
   "password": "motdepasse123"
 }
+
+{
+  "username": "melissa78",
+  "firstname": "Melissa",
+  "lastname": "Dupont",
+  "email": "m_belkessam@estin.dz",
+  "password": "nouveaumdp2024",
+  "role": "client"
+}
+

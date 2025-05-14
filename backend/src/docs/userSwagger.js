@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Users
- *   description: Gestion des utilisateurs (authentification, profil, etc.)
+ *   description: Gestion des comptes utilisateurs (client, partenaire, admin)
  */
 
 /**
@@ -11,10 +11,12 @@
  *   post:
  *     summary: Créer un compte utilisateur
  *     tags: [Users]
+ *     consumes:
+ *       - multipart/form-data
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
@@ -42,11 +44,14 @@
  *                 type: number
  *               longitude:
  *                 type: number
+ *               profile_pic:
+ *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
  *         description: Compte créé avec succès
  *       400:
- *         description: Données invalides
+ *         description: Données invalides ou manquantes
  *       403:
  *         description: Création admin interdite via navigateur
  *       500:
@@ -75,11 +80,11 @@
  *                 type: string
  *     responses:
  *       200:
- *         description: Connexion réussie
+ *         description: Connexion réussie avec token
  *       400:
  *         description: Données manquantes
  *       401:
- *         description: Email ou mot de passe incorrect
+ *         description: Identifiants invalides
  *       500:
  *         description: Erreur serveur
  */
@@ -88,7 +93,7 @@
  * @swagger
  * /users/forgot-password:
  *   post:
- *     summary: Réinitialiser le mot de passe via email
+ *     summary: Réinitialisation du mot de passe par email
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -101,7 +106,6 @@
  *             properties:
  *               email:
  *                 type: string
- *                 example: utilisateur@example.com
  *     responses:
  *       200:
  *         description: Mot de passe temporaire envoyé
@@ -109,19 +113,6 @@
  *         description: Email requis
  *       404:
  *         description: Utilisateur non trouvé
- *       500:
- *         description: Erreur serveur
- */
-
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Récupérer tous les utilisateurs (admin uniquement)
- *     tags: [Users]
- *     responses:
- *       200:
- *         description: Liste des utilisateurs
  *       500:
  *         description: Erreur serveur
  */
@@ -162,6 +153,8 @@
  *                 type: string
  *               lastname:
  *                 type: string
+ *               email:
+ *                 type: string
  *               password:
  *                 type: string
  *               profile_pic:
@@ -194,6 +187,23 @@
 
 /**
  * @swagger
+ * /users:
+ *   get:
+ *     summary: Récupérer tous les utilisateurs (admin uniquement)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des utilisateurs
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
  * /users/{id}:
  *   put:
  *     summary: Modifier un utilisateur (admin ou soi-même)
@@ -201,11 +211,12 @@
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - name: id
- *         in: path
- *         required: true
+ *       - in: path
+ *         name: id
  *         schema:
  *           type: integer
+ *         required: true
+ *         description: ID de l'utilisateur
  *     requestBody:
  *       required: true
  *       content:
@@ -241,11 +252,12 @@
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - name: id
- *         in: path
- *         required: true
+ *       - in: path
+ *         name: id
  *         schema:
  *           type: integer
+ *         required: true
+ *         description: ID de l'utilisateur
  *     responses:
  *       200:
  *         description: Compte supprimé

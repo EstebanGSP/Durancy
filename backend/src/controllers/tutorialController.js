@@ -24,6 +24,7 @@ class TutorialController {
       const tutorials = await Tutorial.findAll({
         include: {
           model: Kit,
+          as: 'kit', // Nécessaire pour faire le lien avec le modèle Kit
           attributes: ['id', 'name']
         }
       });
@@ -40,6 +41,7 @@ class TutorialController {
         where: { kit_id: req.params.kitId },
         include: {
           model: Kit,
+          as: 'kit',
           attributes: ['id', 'name']
         }
       });
@@ -71,8 +73,8 @@ class TutorialController {
     }
   }
 
-    // 5. Supprimer un tutoriel
-    async delete(req, res) {
+  // Supprimer un tutoriel
+  async delete(req, res) {
     try {
       const tutorial = await Tutorial.findByPk(req.params.id);
       if (!tutorial) return res.status(404).json({ error: "Tutoriel non trouvé." });
@@ -83,7 +85,6 @@ class TutorialController {
       res.status(500).json({ error: "Erreur suppression : " + error.message });
     }
   }
-  
 }
 
 module.exports = new TutorialController();
