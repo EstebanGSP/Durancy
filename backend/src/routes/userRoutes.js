@@ -12,7 +12,7 @@ router.post('/forgot-password', userController.forgotPassword);
 
 // Routes privées (utilisateur connecté ou admin)
 router.get('/me', verifyToken, userController.getMe);
-router.put('/me', verifyToken, userController.updateMe);
+router.put('/me', verifyToken, upload.single('profile_pic'), userController.updateMe);
 router.delete('/me', verifyToken, userController.deleteMe);
 
 

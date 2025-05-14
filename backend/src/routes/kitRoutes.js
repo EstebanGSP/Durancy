@@ -1,10 +1,18 @@
-// src/routes/kitRoutes.js
 const express = require('express');
 const router = express.Router();
 const KitController = require('../controllers/kitController');
 const { verifyToken, isAdmin } = require('../middlewares/auth');
+const uploadKitImage = require('../middlewares/uploadKitImage'); 
 
-router.post('/', verifyToken, isAdmin, KitController.create);
+// utilise uploadKitImage.single('image') pour gérer l'upload de fichier
+router.post(
+  '/',
+  verifyToken,
+  isAdmin,
+  uploadKitImage.single('image'), 
+  KitController.create
+);
+
 router.put('/:id', verifyToken, isAdmin, KitController.update);
 router.delete('/:id', verifyToken, isAdmin, KitController.delete);
 router.get('/', KitController.getAll);

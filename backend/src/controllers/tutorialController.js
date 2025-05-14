@@ -24,7 +24,6 @@ class TutorialController {
       const tutorials = await Tutorial.findAll({
         include: {
           model: Kit,
-          as: 'kit', // Nécessaire pour faire le lien avec le modèle Kit
           attributes: ['id', 'name']
         }
       });

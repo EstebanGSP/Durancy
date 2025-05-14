@@ -12,3 +12,17 @@
   "role": "client"
 }
 
+username: melissa
+email: melissa@admin.com
+password: motdepassefort
+role: admin
+profile_pic: (file)
+
+{
+  "username": "melissaClient22",
+  "firstname": "Melissa",
+  "lastname": "Dupont",
+  "email": "melissa.client22@example.com",
+  "password": "azerty123",
+  "role": "client"
+}

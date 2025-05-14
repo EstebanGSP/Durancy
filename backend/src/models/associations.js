@@ -22,7 +22,7 @@ class AssociationManager {
     Kit.belongsToMany(Cart, { through: CartKit, foreignKey: 'kit_id' });
 
     // Kit - Tutorial (1:1)
-    Kit.hasOne(Tutorial, { foreignKey: 'kit_id' });
+    Kit.hasMany(Tutorial, { foreignKey: 'kit_id' });
     Tutorial.belongsTo(Kit, { foreignKey: 'kit_id' });
 
     // User - Review (1:N)
