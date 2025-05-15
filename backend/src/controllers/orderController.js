@@ -136,6 +136,52 @@ class OrderController {
       res.status(500).json({ error: "Erreur lors de la récupération : " + error.message });
     }
   }
+  async updateStatus(req, res) {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const allowedStatus = ['payé', 'préparation', 'expédiée', 'livrée', 'annulée'];
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({ error: "Statut invalide." });
+    }
+
+    const order = await Order.findByPk(id);
+    if (!order) return res.status(404).json({ error: "Commande introuvable." });
+
+    order.status = status;
+    await order.save();
+
+    res.status(200).json({ message: "Statut mis à jour.", order });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur changement statut : " + error.message });
+  }
+}
+  async markAsDelivered(req, res) {
+  try {
+    const { id } = req.params;
+    const user_id = req.user.id;
+
+    const order = await Order.findByPk(id);
+    if (!order) return res.status(404).json({ error: "Commande introuvable." });
+
+    if (order.user_id !== user_id) {
+      return res.status(403).json({ error: "Vous ne pouvez confirmer que vos propres commandes." });
+    }
+
+    if (order.status !== 'expédiée') {
+      return res.status(400).json({ error: "Vous ne pouvez confirmer que les commandes expédiées." });
+    }
+
+    order.status = 'livrée';
+    await order.save();
+
+    res.status(200).json({ message: "Commande confirmée comme livrée.", order });
+  } catch (err) {
+    res.status(500).json({ error: "Erreur confirmation livraison : " + err.message });
+  }
+}
+
 }
 
 module.exports = new OrderController();

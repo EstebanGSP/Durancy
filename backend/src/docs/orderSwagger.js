@@ -1,36 +1,31 @@
 /**
  * @swagger
  * tags:
- *   name: Commandes
- *   description: Gestion des commandes utilisateur
+ *   name: Orders
+ *   description: Gestion des commandes
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     KitCommande:
+ *     Order:
  *       type: object
- *       required:
- *         - kit_id
- *         - quantity
  *       properties:
- *         kit_id:
+ *         id:
  *           type: integer
- *         quantity:
+ *         user_id:
  *           type: integer
- *     CommandeInput:
- *       type: object
- *       required:
- *         - kits
- *       properties:
- *         kits:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/KitCommande'
+ *         total:
+ *           type: number
  *         delivery_fee:
  *           type: number
- *           description: Frais de livraison
+ *         date_order:
+ *           type: string
+ *           format: date
+ *         status:
+ *           type: string
+ *           enum: [payé, préparation, expédiée, livrée, annulée]
  */
 
 /**
@@ -38,7 +33,7 @@
  * /orders:
  *   post:
  *     summary: Créer une commande
- *     tags: [Commandes]
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -46,18 +41,30 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CommandeInput'
+ *             type: object
+ *             properties:
+ *               kits:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     kit_id:
+ *                       type: integer
+ *                     quantity:
+ *                       type: integer
+ *               delivery_fee:
+ *                 type: number
  *     responses:
  *       201:
  *         description: Commande créée avec succès
  *       400:
- *         description: Erreur dans les données de la commande
+ *         description: Données manquantes
  *       500:
  *         description: Erreur serveur
 
  *   get:
- *     summary: Voir toutes les commandes (admin uniquement)
- *     tags: [Commandes]
+ *     summary: Voir toutes les commandes (admin)
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -68,20 +75,26 @@
 
  * /orders/me:
  *   get:
- *     summary: Voir les commandes de l'utilisateur connecté
- *     tags: [Commandes]
+ *     summary: Voir les commandes du client connecté
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *         description: Filtrer par statut
  *     responses:
  *       200:
- *         description: Liste des commandes utilisateur
+ *         description: Commandes récupérées
  *       500:
  *         description: Erreur serveur
 
  * /orders/{id}:
  *   get:
- *     summary: Voir une commande spécifique
- *     tags: [Commandes]
+ *     summary: Voir une commande par ID (sécurisé)
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -92,17 +105,15 @@
  *           type: integer
  *     responses:
  *       200:
- *         description: Commande trouvée
+ *         description: Commande récupérée
  *       403:
  *         description: Accès interdit
  *       404:
  *         description: Commande introuvable
- *       500:
- *         description: Erreur serveur
 
  *   delete:
- *     summary: Supprimer une commande (admin uniquement)
- *     tags: [Commandes]
+ *     summary: Supprimer une commande (admin)
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -116,13 +127,11 @@
  *         description: Commande supprimée
  *       404:
  *         description: Commande introuvable
- *       500:
- *         description: Erreur serveur
 
  * /orders/{id}/cancel:
  *   patch:
- *     summary: Annuler une commande (admin uniquement)
- *     tags: [Commandes]
+ *     summary: Annuler une commande (admin)
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -136,8 +145,58 @@
  *         description: Commande annulée
  *       404:
  *         description: Commande introuvable
- *       500:
- *         description: Erreur serveur
+
+ * /orders/{id}/status:
+ *   patch:
+ *     summary: Mettre à jour le statut (admin)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 enum: [payé, préparation, expédiée, livrée, annulée]
+ *     responses:
+ *       200:
+ *         description: Statut mis à jour
+ *       400:
+ *         description: Statut invalide
+ *       404:
+ *         description: Commande introuvable
+
+ * /orders/{id}/confirm-delivery:
+ *   patch:
+ *     summary: Confirmer la livraison (client)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Livraison confirmée
+ *       403:
+ *         description: Accès refusé
+ *       400:
+ *         description: Statut non valide pour confirmation
+ *       404:
+ *         description: Commande introuvable
 
  * components:
  *   securitySchemes:
