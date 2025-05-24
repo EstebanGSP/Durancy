@@ -12,6 +12,7 @@ import AccountPage from "./pages/AccountPage.jsx";
 import CartPage from "./pages/CartPage";
 import RepairRdvForm from "./pages/RepairRdvForm";
 import RepairConfirmation from "./pages/RepairConfirmation";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/panier" element={<CartPage />} />
           <Route path="/rdv" element={<RepairRdvForm />} />
           <Route path="/rdv/confirmation" element={<RepairConfirmation />} />
+          <Route path="/admin" element={<AdminPage />}></Route>
         </Routes>
       </div>
     </Router>
