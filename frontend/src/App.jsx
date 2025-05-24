@@ -10,6 +10,8 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import EmailConfirmationPage from "./pages/EmailConfirmationPage.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import CartPage from "./pages/CartPage";
+import RepairRdvForm from "./pages/RepairRdvForm";
+import RepairConfirmation from "./pages/RepairConfirmation";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/confirmation" element={<EmailConfirmationPage />} />
           <Route path="/compte" element={<AccountPage />} />
           <Route path="/panier" element={<CartPage />} />
+          <Route path="/rdv" element={<RepairRdvForm />} />
+          <Route path="/rdv/confirmation" element={<RepairConfirmation />} />
         </Routes>
       </div>
     </Router>

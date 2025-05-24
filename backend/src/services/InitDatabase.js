@@ -15,7 +15,7 @@ require('../models/Cart');
 let tablesAlreadySynced = false;
 
 /**
- * Fonction qui crée les tables si ce n'est pas déjà fait
+ * Fonction who creat mes tables 
  */
 async function createTables() {
   if (tablesAlreadySynced) return;

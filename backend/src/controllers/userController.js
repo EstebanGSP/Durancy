@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Partner = require('../models/Partner');
+const sendMail = require('../utils/mailer');
 
 class UserController {
   async register(req, res) {
@@ -21,13 +22,20 @@ class UserController {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      // ✅ Si une image est envoyée, on enregistre son URL
+      let profile_pic = null;
+      if (req.file) {
+        profile_pic = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+      }
+
       const userData = {
         username,
         email,
         password: hashedPassword,
         role,
         firstname: role === 'client' ? firstname : null,
-        lastname: role === 'client' ? lastname : null
+        lastname: role === 'client' ? lastname : null,
+        profile_pic
       };
 
       const newUser = await User.create(userData);
@@ -47,7 +55,6 @@ class UserController {
       res.status(500).json({ error: 'Erreur serveur : ' + error.message });
     }
   }
-
   async login(req, res) {
     try {
       const { email, password } = req.body;
@@ -136,27 +143,29 @@ class UserController {
     }
   }
 
-  async updateMe(req, res) {
-    try {
-      const user = await User.findByPk(req.user.id);
-      if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé.' });
+async updateMe(req, res) {
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé.' });
 
-      const { firstname, lastname, password, profile_pic } = req.body;
+    const { firstname, lastname, email, password, profile_pic } = req.body;
 
-      if (user.role === 'client') {
-        if (firstname) user.firstname = firstname;
-        if (lastname) user.lastname = lastname;
-      }
-
-      if (profile_pic) user.profile_pic = profile_pic;
-      if (password) user.password = await bcrypt.hash(password, 10);
-
-      await user.save();
-      res.status(200).json({ message: 'Compte mis à jour avec succès.', user });
-    } catch (error) {
-      res.status(500).json({ error: 'Erreur lors de la mise à jour : ' + error.message });
+    if (user.role === 'client') {
+      if (firstname) user.firstname = firstname;
+      if (lastname) user.lastname = lastname;
+      if (email) user.email = email;
     }
+
+    if (profile_pic) user.profile_pic = profile_pic;
+    if (password) user.password = await bcrypt.hash(password, 10);
+
+    await user.save();
+    res.status(200).json({ message: 'Compte mis à jour avec succès.', user });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la mise à jour : ' + error.message });
   }
+}
+
 
   async deleteMe(req, res) {
     try {
@@ -166,6 +175,36 @@ class UserController {
       res.status(200).json({ message: 'Votre compte a bien été supprimé.' });
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la suppression : ' + error.message });
+    }
+  }
+  
+  async forgotPassword(req, res) {
+    try {
+      const { email } = req.body;
+
+      if (!email) return res.status(400).json({ error: "Email requis" });
+
+      const user = await User.findOne({ where: { email } });
+      if (!user) return res.status(404).json({ error: "Utilisateur non trouvé" });
+
+      // Générer mot de passe temporaire
+      const tempPassword = Math.random().toString(36).slice(-10); // ex: "x7e9k2mpa4"
+      const hashed = await bcrypt.hash(tempPassword, 10);
+
+      // Mise à jour en BDD
+      user.password = hashed;
+      await user.save();
+
+      // Envoi du mail
+      await sendMail(
+        email,
+        "Nouveau mot de passe temporaire - Durancy",
+        `Bonjour, voici votre nouveau mot de passe temporaire : ${tempPassword}`
+      );
+
+      res.status(200).json({ message: "Mot de passe temporaire envoyé par email." });
+    } catch (error) {
+      res.status(500).json({ error: "Erreur serveur : " + error.message });
     }
   }
 }

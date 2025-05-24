@@ -1,111 +1,224 @@
 /**
  * @swagger
  * tags:
- *   name: Utilisateurs
- *   description: Gestion des comptes utilisateur
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     UserRegister:
- *       type: object
- *       required:
- *         - username
- *         - email
- *         - password
- *         - role
- *       properties:
- *         username:
- *           type: string
- *         email:
- *           type: string
- *         password:
- *           type: string
- *         role:
- *           type: string
- *           enum: [client, partenaire, admin]
- *         firstname:
- *           type: string
- *         lastname:
- *           type: string
- *         address:
- *           type: string
- *         latitude:
- *           type: number
- *         longitude:
- *           type: number
-
- *     UserLogin:
- *       type: object
- *       required:
- *         - email
- *         - password
- *       properties:
- *         email:
- *           type: string
- *         password:
- *           type: string
+ *   name: Users
+ *   description: Gestion des comptes utilisateurs (client, partenaire, admin)
  */
 
 /**
  * @swagger
  * /users/register:
  *   post:
- *     summary: Inscription utilisateur
- *     tags: [Utilisateurs]
+ *     summary: Créer un compte utilisateur
+ *     tags: [Users]
+ *     consumes:
+ *       - multipart/form-data
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/UserRegister'
+ *             type: object
+ *             required:
+ *               - username
+ *               - email
+ *               - password
+ *               - role
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *                 enum: [client, partenaire, admin]
+ *               firstname:
+ *                 type: string
+ *               lastname:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *               latitude:
+ *                 type: number
+ *               longitude:
+ *                 type: number
+ *               profile_pic:
+ *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
- *         description: Utilisateur inscrit avec succès
+ *         description: Compte créé avec succès
  *       400:
- *         description: Données invalides
+ *         description: Données invalides ou manquantes
+ *       403:
+ *         description: Création admin interdite via navigateur
  *       500:
  *         description: Erreur serveur
+ */
 
+/**
+ * @swagger
  * /users/login:
  *   post:
  *     summary: Connexion utilisateur
- *     tags: [Utilisateurs]
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserLogin'
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Connexion réussie
+ *         description: Connexion réussie avec token
+ *       400:
+ *         description: Données manquantes
  *       401:
- *         description: Identifiants incorrects
+ *         description: Identifiants invalides
  *       500:
  *         description: Erreur serveur
+ */
 
+/**
+ * @swagger
+ * /users/forgot-password:
+ *   post:
+ *     summary: Réinitialisation du mot de passe par email
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Mot de passe temporaire envoyé
+ *       400:
+ *         description: Email requis
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
  * /users/me:
  *   get:
- *     summary: Récupérer les infos de l'utilisateur connecté
- *     tags: [Utilisateurs]
+ *     summary: Récupérer son propre profil
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Informations utilisateur
+ *         description: Données utilisateur récupérées
  *       404:
  *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
 
+/**
+ * @swagger
+ * /users/me:
  *   put:
- *     summary: Mettre à jour les infos de l'utilisateur connecté
- *     tags: [Utilisateurs]
+ *     summary: Modifier son propre compte
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
- *       required: false
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstname:
+ *                 type: string
+ *               lastname:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               profile_pic:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Compte mis à jour
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
+ * /users/me:
+ *   delete:
+ *     summary: Supprimer son propre compte
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Compte supprimé
+ *       404:
+ *         description: Utilisateur non trouvé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Récupérer tous les utilisateurs (admin uniquement)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des utilisateurs
+ *       403:
+ *         description: Accès non autorisé
+ *       500:
+ *         description: Erreur serveur
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     summary: Modifier un utilisateur (admin ou soi-même)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     requestBody:
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
@@ -122,90 +235,36 @@
  *     responses:
  *       200:
  *         description: Compte mis à jour
+ *       403:
+ *         description: Non autorisé
  *       404:
  *         description: Utilisateur non trouvé
-
- *   delete:
- *     summary: Supprimer son propre compte
- *     tags: [Utilisateurs]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Compte supprimé
- *       404:
- *         description: Utilisateur non trouvé
-
- * /users:
- *   get:
- *     summary: Récupérer tous les utilisateurs (admin uniquement)
- *     tags: [Utilisateurs]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Liste des utilisateurs
  *       500:
  *         description: Erreur serveur
+ */
 
+/**
+ * @swagger
  * /users/{id}:
- *   put:
- *     summary: Mettre à jour un utilisateur (admin ou propriétaire)
- *     tags: [Utilisateurs]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: false
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               firstname:
- *                 type: string
- *               lastname:
- *                 type: string
- *               password:
- *                 type: string
- *               profile_pic:
- *                 type: string
- *     responses:
- *       200:
- *         description: Utilisateur mis à jour
- *       403:
- *         description: Modification non autorisée
- *       404:
- *         description: Utilisateur non trouvé
-
  *   delete:
- *     summary: Supprimer un utilisateur (admin ou propriétaire)
- *     tags: [Utilisateurs]
+ *     summary: Supprimer un utilisateur (admin ou soi-même)
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
  *         schema:
  *           type: integer
+ *         required: true
+ *         description: ID de l'utilisateur
  *     responses:
  *       200:
  *         description: Compte supprimé
  *       403:
- *         description: Suppression non autorisée
+ *         description: Non autorisé
  *       404:
  *         description: Utilisateur non trouvé
-
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
+ *       500:
+ *         description: Erreur serveur
  */

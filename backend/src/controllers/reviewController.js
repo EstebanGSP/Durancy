@@ -1,4 +1,3 @@
-// src/controllers/reviewController.js
 const Review = require('../models/Review');
 const Tutorial = require('../models/Tutorial');
 const User = require('../models/User');

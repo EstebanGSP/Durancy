@@ -3,17 +3,28 @@ const Tutorial = require('../models/Tutorial');
 
 class KitController {
   async create(req, res) {
-    try {
-      const { name, description, price, stock, category, image } = req.body;
-      if (!name || !description || !price) {
-        return res.status(400).json({ error: "Nom, description et prix sont requis." });
-      }
-      const kit = await Kit.create({ name, description, price, stock, category, image });
-      res.status(201).json({ message: "Kit créé avec succès", kit });
-    } catch (error) {
-      res.status(500).json({ error: "Erreur création kit : " + error.message });
+  try {
+    const { name, description, price, stock, category } = req.body;
+    const image = req.file ? req.file.path : null; // récupère le chemin du fichier uploadé
+
+    if (!name || !description || !price || !image) {
+      return res.status(400).json({ error: "Nom, description, prix et image sont requis." });
     }
+
+    const kit = await Kit.create({
+      name,
+      description,
+      price,
+      stock,
+      category,
+      image
+    });
+
+    res.status(201).json({ message: "Kit créé avec succès", kit });
+  } catch (error) {
+    res.status(500).json({ error: "Erreur création kit : " + error.message });
   }
+}
 
   async update(req, res) {
     try {
@@ -48,19 +59,25 @@ class KitController {
     }
   }
 
-  async getAll(req, res) {
-    try {
-      const kits = await Kit.findAll();
-      res.status(200).json(kits);
-    } catch (error) {
-      res.status(500).json({ error: "Erreur serveur : " + error.message });
-    }
+async getAll(req, res) {
+  try {
+    const kits = await Kit.findAll({
+      include: {
+        model: Tutorial,
+        attributes: ['id', 'title', 'video_url', 'description']
+      }
+    });
+    res.status(200).json(kits);
+  } catch (error) {
+    res.status(500).json({ error: "Erreur serveur : " + error.message });
   }
+}
+
   async getById(req, res) {
     try {
       const kit = await Kit.findByPk(req.params.id, {
         include: {
-          model: Tutorial, // 🔗 Inclure le tutoriel lié
+          model: Tutorial, 
           attributes: ['id', 'title', 'video_url', 'description']
         }
       });

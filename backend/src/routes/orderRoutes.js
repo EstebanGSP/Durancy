@@ -17,6 +17,11 @@ router.get('/', verifyToken, isAdmin, orderController.getAll);
 router.get('/me', verifyToken, orderController.getMyOrders);
 
 router.get('/:id', verifyToken, orderController.getByIdSecure); 
+// Nouvelle route pour mise à jour du statut
+router.patch('/:id/status', verifyToken, isAdmin, orderController.updateStatus);
+//confirm from le client 
+router.patch('/:id/confirm-delivery', verifyToken, orderController.markAsDelivered);
+
 
 
 
