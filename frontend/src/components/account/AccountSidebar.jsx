@@ -1,5 +1,14 @@
 import React from "react";
-import { LogOut, User, List, Wrench, BookOpen, MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  LogOut,
+  User,
+  List,
+  Wrench,
+  BookOpen,
+  MessageCircle,
+} from "lucide-react";
+import { useAuth } from "../../context/AuthContext"; // 👈 à ajouter
 
 const tabs = [
   { id: "infos", label: "Infos personnelles", icon: <User size={16} /> },
@@ -10,6 +19,14 @@ const tabs = [
 ];
 
 const AccountSidebar = ({ activeTab, setActiveTab }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();            // vide le contexte + localStorage
+    navigate("/");       // redirection vers la page d'accueil
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md p-4 space-y-2">
       {tabs.map((tab) => (
@@ -30,7 +47,10 @@ const AccountSidebar = ({ activeTab, setActiveTab }) => {
 
       <hr className="my-4" />
 
-      <div className="text-sm text-gray-500 px-4 py-2 flex items-center gap-2">
+      <button
+        onClick={handleLogout}
+        className="text-sm text-gray-500 px-4 py-2 flex items-center gap-2 hover:bg-gray-100 w-full rounded-lg transition"
+      >
         <img
           src="https://randomuser.me/api/portraits/men/32.jpg"
           alt="profil"
@@ -38,7 +58,7 @@ const AccountSidebar = ({ activeTab, setActiveTab }) => {
         />
         Déconnexion
         <LogOut size={16} className="ml-auto text-gray-400" />
-      </div>
+      </button>
     </div>
   );
 };

@@ -8,9 +8,9 @@ export default function RepairService() {
             <div className="flex flex-col items-center w-full">
               <h2 className="text-3xl lg:text-5xl font-semibold text-white mb-8 leading-snug">
                 <span className="block">Un réparateur vient à vous,</span>
-                <span className="block mt-4 ml-12">en vélo cargo sur Paris</span>
+                <span className="block mt-4 ml-12 mb-10">en vélo cargo sur Paris</span>
               </h2>
-              <button className="bg-white text-black hover:bg-gray-100 px-8 py-4 rounded-full shadow-md text-lg font-semibold transition-all duration-300">
+              <button className="bg-white text-black hover:bg-gray-100 px-20 py-3 shadow-[0_5px_10px_rgba(0,0,0,0.5)] rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-lg shadow-md text-lg font-semibold transition-all duration-300">
                 Voir les quartiers desservis
               </button>
             </div>

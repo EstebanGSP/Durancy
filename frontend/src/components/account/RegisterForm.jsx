@@ -1,47 +1,93 @@
 import React, { useState } from "react";
+import { registerUser } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
+    firstname: "",
+    lastname: "",
   });
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      setError("Les mots de passe ne correspondent pas.");
       return;
     }
-    alert("Inscription simulée !");
+
+    const payload = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      role: "client", // requis par l’API
+      firstname: formData.firstname,
+      lastname: formData.lastname,
+    };
+
+    try {
+      await registerUser(payload);
+      navigate("/connexion");
+    } catch (err) {
+      setError(err.response?.data?.error || "Erreur lors de l'inscription.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-md mx-auto w-full">
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto w-full">
+
       <input
         type="text"
-        name="firstName"
+        name="username"
+        placeholder="Nom d'utilisateur"
+        value={formData.username}
+        onChange={handleChange}
+        required
+        className="w-full p-3 rounded shadow text-black"
+      />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Adresse e-mail"
+        value={formData.email}
+        onChange={handleChange}
+        required
+        className="w-full p-3 rounded shadow text-black"
+      />
+
+      <input
+        type="text"
+        name="firstname"
         placeholder="Prénom"
-        value={formData.firstName}
+        value={formData.firstname}
         onChange={handleChange}
         required
-        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616]"
+        className="w-full p-3 rounded shadow text-black"
       />
+
       <input
         type="text"
-        name="lastName"
+        name="lastname"
         placeholder="Nom de famille"
-        value={formData.lastName}
+        value={formData.lastname}
         onChange={handleChange}
         required
-        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616]" 
+        className="w-full p-3 rounded shadow text-black"
       />
+
       <input
         type="password"
         name="password"
@@ -49,8 +95,9 @@ const RegisterForm = () => {
         value={formData.password}
         onChange={handleChange}
         required
-        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616] mb-2"
+        className="w-full p-3 rounded shadow text-black"
       />
+
       <input
         type="password"
         name="confirmPassword"
@@ -58,8 +105,10 @@ const RegisterForm = () => {
         value={formData.confirmPassword}
         onChange={handleChange}
         required
-        className="w-full bg-white text-gray-800 p-3 rounded shadow placeholder-[#161616] mb-2"
+        className="w-full p-3 rounded shadow text-black"
       />
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <button
         type="submit"

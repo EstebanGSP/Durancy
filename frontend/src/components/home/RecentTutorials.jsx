@@ -22,6 +22,7 @@ export default function RecentTutorials() {
     },
   ];
 
+  
   return (
     <section className="w-full py-20 px-6">
       <div className="max-w-7xl mx-auto">

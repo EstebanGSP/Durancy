@@ -41,7 +41,7 @@ const PopularKits = () => {
 
         {/* Bouton en bas */}
         <div className="flex justify-end mt-10">
-          <button className="bg-[#9B59B6] hover:bg-purple-700 text-white font-light py-3 px-10 rounded-full transition-all duration-300">
+          <button className="bg-[#9B59B6] hover:bg-purple-700 text-white font-light py-3 px-7 rounded-lg transition-all duration-300">
             Voir tous les articles
           </button>
         </div>

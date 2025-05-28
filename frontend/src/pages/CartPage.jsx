@@ -11,7 +11,7 @@ const CartPage = () => {
 
       <main className="max-w-7xl mx-auto px-4 pt-32 pb-20">
 
-        {/* Étapes */}
+        {/* Étapes panier */}
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-8 w-full max-w-xl mx-auto">
             <Step label="Panier" active />
@@ -23,14 +23,11 @@ const CartPage = () => {
           </a>
         </div>
 
-        {/* Grille principale */}
+        {/* Grille du contenu panier + résumé */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Colonne de gauche (2/3) */}
           <div className="md:col-span-2">
             <CartItems />
           </div>
-
-          {/* Colonne de droite (1/3) */}
           <div>
             <CartSummary />
           </div>
@@ -44,7 +41,7 @@ const CartPage = () => {
 
 export default CartPage;
 
-// Étape (indicateur haut)
+// ✅ Étapes d’avancement
 const Step = ({ label, active }) => (
   <div className="flex flex-col items-center flex-1 text-center">
     <div
