@@ -3,7 +3,6 @@ import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import ContactHeader from "../components/contact/ContactHeader";
 import ContactForm from "../components/contact/ContactForm";
-import ContactFAQ from "../components/contact/ContactFAQ";
 import ContactAside from "../components/contact/ContactAside";
 
 const ContactPage = () => {
@@ -18,7 +17,6 @@ const ContactPage = () => {
           {/* Colonne principale */}
           <div className="lg:col-span-2 space-y-10">
             <ContactForm />
-            <ContactFAQ />
           </div>
 
           {/* Colonne latérale */}

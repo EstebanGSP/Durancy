@@ -1,28 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const ContactAside = () => {
   return (
-    <aside className="space-y-6 text-sm">
-      <div className="space-y-2">
-        <p className="font-semibold">Besoin d’une réparation rapide ?</p>
-        <p>Découvrez nos kits disponibles.</p>
-        <Link
-          to="/kits"
-          className="inline-block bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 transition"
-        >
-          Voir les kits
-        </Link>
-      </div>
+    // margin-top only mobile to separate from form
+    <aside className="flex flex-col items-center text-center mt-24 md:mt-0">
+      {/* Image de téléphone */}
+      <img
+        src="/images/Purplephone.png"
+        alt="Icône téléphone"
+        className="w-34 h-34 mb-12"
+      />
 
-      <div>
-        <p>
-          <strong>Adresse email :</strong> support@durancy.fr
-        </p>
-        <p>
-          <strong>Numéro de téléphone :</strong> 09.08.07.06.05
-        </p>
-      </div>
+      <h3 className="text-3xl font-bold mb-3">Besoin d’une</h3>
+      <h3 className="text-3xl font-bold mb-4">assistance rapide ?</h3>
+
+      <p className="text-lg font-semibold mb-2">
+        Adresse email : support@durancy.fr
+      </p>
+      <p className="text-lg font-semibold">
+        Numéro de téléphone : 09.08.07.06.05
+      </p>
     </aside>
   );
 };

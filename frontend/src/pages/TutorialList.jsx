@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+// src/pages/TutorialList.jsx
+
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import TutorialCard from "../components/tutorial/TutorialCard";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
+import { useAuth } from "../context/AuthContext";
 
 const TutorialList = () => {
+  const { isAdmin } = useAuth();
   const [tutorials, setTutorials] = useState([]);
   const [filteredTutorials, setFilteredTutorials] = useState([]);
   const [error, setError] = useState(null);
@@ -25,7 +30,7 @@ const TutorialList = () => {
       });
   }, []);
 
-  // 🔍 Filtrage dynamique
+  // Filtrage dynamique
   useEffect(() => {
     let filtered = tutorials;
 
@@ -49,17 +54,29 @@ const TutorialList = () => {
   return (
     <>
       <Header />
-      <main className="max-w-7xl mx-auto px-6 py-32">
-        <h1 className="text-3xl font-bold mb-8">Tous les tutoriels</h1>
 
-        {/* 🔽 Barres de filtrage */}
+      <main className="max-w-7xl mx-auto px-6 py-32">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">Tous les tutoriels</h1>
+
+          {isAdmin() && (
+            <Link
+              to="/admin/add-tutorial"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition"
+            >
+              + Ajouter un tutoriel
+            </Link>
+          )}
+        </div>
+
+        {/* Barres de filtrage */}
         <div className="flex flex-col md:flex-row gap-4 items-center mb-8">
           <select
             value={deviceType}
             onChange={(e) => setDeviceType(e.target.value)}
-            className="border px-3 py-2 rounded-md"
+            className="border px-3 py-2 rounded-md border-[#9B59B640] border-2"
           >
-            <option value="">Type d'appareil 🔽</option>
+            <option value="">Type d'appareil</option>
             <option value="iphone">iPhone</option>
             <option value="ipad">iPad</option>
             <option value="android">Android</option>
@@ -69,9 +86,9 @@ const TutorialList = () => {
           <select
             value={difficulty}
             onChange={(e) => setDifficulty(e.target.value)}
-            className="border px-3 py-2 rounded-md"
+            className="border px-3 py-2 rounded-md border-[#9B59B640] border-2"
           >
-            <option value="">Difficulté 🔽</option>
+            <option value="">Difficulté</option>
             <option value="Facile">Facile</option>
             <option value="Intermédiaire">Intermédiaire</option>
             <option value="Difficile">Difficile</option>
@@ -82,11 +99,11 @@ const TutorialList = () => {
             placeholder="🔍 Recherche"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border px-3 py-2 rounded-md w-full md:w-64"
+            className="border border-gray-500 px-3 py-2 rounded-md w-full md:w-64"
           />
         </div>
 
-        {/* 🔄 Liste des tutoriels */}
+        {/* Liste des tutoriels */}
         {error && <p className="text-red-500">{error}</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -95,6 +112,7 @@ const TutorialList = () => {
           ))}
         </div>
       </main>
+
       <Footer />
     </>
   );

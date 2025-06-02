@@ -1,9 +1,13 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
 import { addToCart } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const KitCard = ({ kit }) => {
-  const handleAddToCart = async () => {
+  const navigate = useNavigate();
+
+  const handleAddToCart = async (e) => {
+    e.stopPropagation(); // 🔒 empêche la redirection quand on clique sur le bouton
     try {
       await addToCart(kit.id, 1);
       alert("Ajouté au panier !");
@@ -13,10 +17,25 @@ const KitCard = ({ kit }) => {
     }
   };
 
+  const handleNavigate = () => {
+    navigate(`/kits/${kit.id}`);
+  };
+
   return (
-    <div className="border rounded-lg shadow-sm p-4 bg-white hover:shadow-md transition">
+    <div
+      onClick={handleNavigate}
+      className="cursor-pointer border rounded-lg shadow-sm p-4 bg-white hover:shadow-md transition"
+    >
       <div className="relative mb-4">
-        <div className="w-full h-40 bg-gray-200 rounded" />
+        <div className="w-full h-40 bg-gray-200 rounded">
+          {kit.image && (
+            <img
+              src={kit.image}
+              alt={kit.name}
+              className="w-full h-40 object-contain rounded"
+            />
+          )}
+        </div>
         <button
           onClick={handleAddToCart}
           className="absolute top-2 right-2 p-2 bg-white rounded-full shadow"
@@ -25,10 +44,10 @@ const KitCard = ({ kit }) => {
         </button>
       </div>
       <h3 className="font-bold text-sm mb-1">{kit.name}</h3>
-      <p className="text-sm text-gray-600 mb-2">{kit.description}</p>
+      <p className="text-sm text-gray-600 mb-2 line-clamp-2">{kit.description}</p>
       <div className="flex justify-between items-center text-sm font-semibold">
         <div className="text-yellow-500">★★★★★</div>
-        <div>{kit.price} €</div>
+        <div>{Number(kit.price).toFixed(2)} €</div>
       </div>
     </div>
   );

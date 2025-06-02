@@ -20,21 +20,21 @@ export default function Newsletter() {
         </div>
 
         {/* Colonne droite avec le formulaire */}
-        <div className="flex flex-col justify-center pl-36 py-16">
-          <div className="max-w-xl w-full">
+        <div className="flex flex-col justify-center px-4 sm:px-8 lg:pl-36 py-16">
+          <div className="w-full max-w-md mx-auto">
             <input
               type="email"
               placeholder="Votre email"
-              className="w-[650px] border-2 border-black px-4 py-3 rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none text-sm mb-4 placeholder:font-bold placeholder:text-black text-black"
+              className="w-full border-2 border-black px-6 py-3 rounded-tr-lg rounded-br-lg rounded-bl-lg rounded-tl-none text-sm mb-4 placeholder:font-bold placeholder:text-black text-black focus:outline-none"
             />
 
-            <p className="text-sm mb-4 mr-6">
-              <span className="font-bold">Pas de SPAM!</span> Nous vous enverrons un mail uniquement
+            <p className="text-sm mb-4">
+              <span className="font-bold">Pas de SPAM !</span> Nous vous enverrons un mail uniquement
               quand des nouveaux services apparaissent pour vous accompagner dans cette démarche
               <span className="whitespace-nowrap"> éco-responsable.</span>
             </p>
 
-            <div className="flex justify-end">
+            <div className="flex justify-center md:justify-end">
               <button className="bg-white border border-black px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
                 Je souscris
               </button>

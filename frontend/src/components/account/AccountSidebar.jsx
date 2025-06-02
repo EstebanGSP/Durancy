@@ -52,7 +52,7 @@ const AccountSidebar = ({ activeTab, setActiveTab }) => {
         className="text-sm text-gray-500 px-4 py-2 flex items-center gap-2 hover:bg-gray-100 w-full rounded-lg transition"
       >
         <img
-          src="https://randomuser.me/api/portraits/men/32.jpg"
+          src="https://randomuser.me/api/portraits/lego/1.jpg"
           alt="profil"
           className="w-6 h-6 rounded-full"
         />
