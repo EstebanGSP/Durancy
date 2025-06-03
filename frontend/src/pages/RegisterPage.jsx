@@ -27,7 +27,7 @@ const RegisterPage = () => {
           </div>
 
           {/* Partie droite : illustration */}
-          <div className="hidden md:flex items-center justify-center bg-white relative">
+          <div className="hidden md:flex justify-center bg-white relative">
             {/* Éclair décoratif centré au-dessus */}
             <img
               src="/images/minieclairs.png"
@@ -39,7 +39,7 @@ const RegisterPage = () => {
             <img
               src="/images/worker.png"
               alt="Réparateur Durancy"
-              className="ml-16 max-w-xs z-10"
+              className="max-w-xs object-contain mx-auto self-end mr-16"
             />
           </div>
         </div>

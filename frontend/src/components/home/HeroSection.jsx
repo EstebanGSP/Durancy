@@ -14,8 +14,8 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="bg-[#9B59B6CC] pt-32 pb-20 w-full px-4 sm:px-8 md:py-20">
-      <div className="w-full flex flex-col md:flex-row items-center justify-between gap-8">
+    <section className="bg-[#9B59B6CC] pt-16 w-full px-4 sm:px-8 flex flex-row">
+      <div className="w-full pt-32 pb-20 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8">
 
         {/* Texte à gauche */}
         <div className="text-center md:text-left w-full md:w-1/1 px-2 sm:px-8">
@@ -59,16 +59,16 @@ const HeroSection = () => {
             </button>
           </div>
         </div>
-
-        {/* Image à droite */}
-        <div className="hidden md:flex w-full md:w-1/2 justify-center md:justify-end items-center md:mt-0">
-          <img
-            src="/images/bonhommedurancy.png"
-            alt="Durancy Hero"
-            className="w-64 sm:w-80 md:w-[500px] object-contain"
-          />
-        </div>
       </div>
+      {/* Image à droite */}
+          {/* ✅ Image à droite, alignée en bas */}
+  <div className="hidden md:flex w-full md:w-1/2 justify-center md:justify-end items-end">
+    <img
+      src="/images/bonhommedurancy.png"
+      alt="Durancy Hero"
+      className="w-64 sm:w-80 md:w-[500px] object-contain self-end"
+    />
+  </div>
     </section>
   );
 };

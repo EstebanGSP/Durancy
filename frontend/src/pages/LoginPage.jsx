@@ -18,7 +18,7 @@ const LoginPage = () => {
           </div>
 
           {/* Partie droite : illustration + message */}
-          <div className="bg-white relative hidden md:flex items-center justify-center p-10">
+          <div className="bg-white relative hidden md:flex items-center justify-center pt-10">
             <div className="text-center">
               <h2 className="text-2xl font-semibold mb-6 text-gray-800">
                 Bienvenue chez Durancy
