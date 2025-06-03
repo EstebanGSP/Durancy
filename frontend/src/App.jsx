@@ -21,6 +21,9 @@ import RepairConfirmation from "./pages/RepairConfirmation.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import RdvInfosPage from "./pages/RdvInfosPage.jsx";
 import KitProduct from "./pages/KitProduct.jsx";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderSuccess from "./pages/OrderSuccess";
+
 
 // Pages Admin à ajouter
 import AddKitPage from "./pages/admin/AddKitPage.jsx";
@@ -51,6 +54,10 @@ function AppRoutes() {
       <Route path="/rdv" element={<RepairRdvForm />} />
       <Route path="/rdv/infos" element={<RdvInfosPage />} />
       <Route path="/rdv/confirmation" element={<RepairConfirmation />} />
+      <Route path="/panier/confirmation" element={<OrderConfirmation />} />
+      <Route path="/panier/valide" element={<OrderSuccess />} />
+
+
 
       {/* Page principale Admin (dashboard) */}
       <Route

@@ -60,8 +60,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      {/* Image à droite */}
-          {/* ✅ Image à droite, alignée en bas */}
+    {/* ✅ Image à droite, alignée en bas */}
   <div className="hidden md:flex w-full md:w-1/2 justify-center md:justify-end items-end">
     <img
       src="/images/bonhommedurancy.png"

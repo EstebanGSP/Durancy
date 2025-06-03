@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { getCart, validateCart } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const CartSummary = () => {
   const [cartItems, setCartItems] = useState([]);
   const [shipping, setShipping] = useState("free");
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
         const data = await getCart();
-        console.log("DEBUG PANIER (CartSummary):", JSON.stringify(data, null, 2));
-
         const kits = data.Kits || [];
         const itemsWithQuantity = kits.map((kit) => ({
           ...kit,
@@ -46,8 +46,14 @@ const CartSummary = () => {
 
   const handleValidation = async () => {
     try {
+      // Sauvegarde les articles avant validation
+      localStorage.setItem("lastCartItems", JSON.stringify(cartItems));
+
       await validateCart();
-      setMessage("Commande validée avec succès !");
+
+      setTimeout(() => {
+        navigate("/panier/confirmation");
+      }, 10);
     } catch (err) {
       console.error("Erreur validation :", err);
       setMessage("Erreur lors de la validation du panier.");
