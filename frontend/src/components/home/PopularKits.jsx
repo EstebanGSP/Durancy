@@ -33,7 +33,7 @@ const PopularKits = () => {
               className="bg-white rounded-xl shadow-2xl hover:shadow-[0px_0px_25px_rgba(0,0,0,0.15)] transition-all duration-300 overflow-hidden flex flex-col"
             >
               <img
-                src={kit.image}
+                src={`${process.env.REACT_APP_API_URL}/${kit.image}`}
                 alt={kit.name}
                 className="h-40 w-full object-contain p-4"
               />

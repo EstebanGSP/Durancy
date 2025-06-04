@@ -50,18 +50,7 @@ const Footer = () => {
           <p className="font-semibold">Nous suivre</p>
           <div className="flex gap-6">
             <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/Facebook.png"
-                alt="Facebook"
-                className="w-16 hover:scale-105 transition-transform"
-              />
-            </a>
-            <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/durancydiy/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -79,6 +68,17 @@ const Footer = () => {
               <img
                 src="/images/Youtube.png"
                 alt="YouTube"
+                className="w-16 hover:scale-105 transition-transform"
+              />
+            </a>
+            <a
+              href="https://www.tiktok.com/@durancy.officiel"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/images/tiktok.png"
+                alt="Tiktok"
                 className="w-16 hover:scale-105 transition-transform"
               />
             </a>

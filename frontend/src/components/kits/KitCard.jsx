@@ -30,7 +30,7 @@ const KitCard = ({ kit }) => {
         <div className="w-full h-40 bg-gray-200 rounded">
           {kit.image && (
             <img
-              src={kit.image}
+              src={`${process.env.REACT_APP_API_URL}/${kit.image}`}
               alt={kit.name}
               className="w-full h-40 object-contain rounded"
             />

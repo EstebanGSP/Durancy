@@ -28,7 +28,7 @@ const Header = () => {
       >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {!isScrolled && (
-          <div className="flex items-center">
+          <div className="flex items-center absolute tl-5">
             <Link to="/">
               <img
                 src="/images/logo-durancy.png"
@@ -68,17 +68,17 @@ const Header = () => {
           </Link>
         </nav>
 
-        {/* Menu burger mobile */}
+        {/* Panier visible toujours */}
+        <Link to="/panier" className="opacity-0 md:opacity-100 text-black hover:text-purple-600 relative ml-4">
+          <ShoppingCart size={24} />
+        </Link>
+
+               {/* Menu burger mobile */}
         <div className="md:hidden flex items-center gap-4">
           <button onClick={toggleMenu} className="text-black">
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
-
-        {/* Panier visible toujours */}
-        <Link to="/panier" className="text-black hover:text-purple-600 relative ml-4">
-          <ShoppingCart size={24} />
-        </Link>
       </div>
 
       {/* Menu mobile déroulant */}
