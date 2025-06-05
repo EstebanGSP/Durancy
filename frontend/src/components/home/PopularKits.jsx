@@ -63,13 +63,13 @@ const PopularKits = () => {
         </div>
       </div>
 
-      <div 
-        className="w-full py-20 mt-10"
+      <div
+        className="w-full py-20 mt-10 
+                  bg-no-repeat md:bg-repeat 
+                  bg-contain 
+                  bg-[center_5rem] md:bg-center"
         style={{
           backgroundImage: "url('/images/minieclairs.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "contain",
-          backgroundPosition: "center",
         }}
       />
     </section>

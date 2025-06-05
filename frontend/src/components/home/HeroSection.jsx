@@ -9,7 +9,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % mots.length);
-    }, 1500);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -22,11 +22,11 @@ const HeroSection = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight text-black flex flex-wrap justify-center md:justify-start gap-2">
             <span className="italic">Réparez en</span>
             <span className="italic">toute</span>
-            <div className="relative inline-flex h-[3.2rem] align-baseline overflow-hidden mb-10">
+            <div className="relative inline-flex h-[3.2rem] align-baseline overflow-hidden mb-10 pr-2">
               <div
-                className="flex flex-col justify-start transition-transform duration-500 ease-in-out"
+                className="flex flex-col justify-start transition-transform duration-500 ease-in-out gap-y-2"
                 style={{
-                  transform: `translateY(-${index * 3}rem)`,
+                  transform: `translateY(-${index * 3.5}rem)`,
                 }}
               >
                 {mots.map((mot, i) => (
