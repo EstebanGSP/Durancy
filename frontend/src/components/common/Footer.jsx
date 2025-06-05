@@ -15,18 +15,18 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 mt-6">
         <a href="/">
           <img
-            src="/images/logo-durancy.png"
+            src="/images/logo-durancy.svg"
             alt="Durancy logo"
             className="h-10 mb-6 md:mb-0"
           />
         </a>
         <nav className="flex flex-wrap justify-center md:justify-end gap-6 font-semibold text-lg">
-          <a href="#">Accueil</a>
-          <a href="#">Tutoriels</a>
-          <a href="#">Kits</a>
-          <a href="#">Services</a>
-          <a href="#">Boutique</a>
-          <a href="#">Contact</a>
+          <a href="/home">Accueil</a>
+          <a href="/tutoriels">Tutoriels</a>
+          <a href="/kits">Kits</a>
+          <a href="/reparer">Réparer</a>
+          <a href="/contact">Contact</a>
+          <a href="/compte">Compte</a>
         </nav>
       </div>
 
@@ -55,19 +55,8 @@ const Footer = () => {
               rel="noopener noreferrer"
             >
               <img
-                src="/images/Instagram.png"
+                src="/images/Instagram.svg"
                 alt="Instagram"
-                className="w-16 hover:scale-105 transition-transform"
-              />
-            </a>
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/Youtube.png"
-                alt="YouTube"
                 className="w-16 hover:scale-105 transition-transform"
               />
             </a>
@@ -77,7 +66,7 @@ const Footer = () => {
               rel="noopener noreferrer"
             >
               <img
-                src="/images/tiktok.png"
+                src="/images/tiktok.svg"
                 alt="Tiktok"
                 className="w-16 hover:scale-105 transition-transform"
               />
@@ -89,9 +78,9 @@ const Footer = () => {
       {/* Bas de page */}
       <div className="text-center text-xs mt-12 pt-6 border-t border-gray-300 flex flex-col gap-2 md:flex-row md:justify-center md:space-x-4 mb-4">
         <span>© 2025 DURANCY. Tous droits réservés</span>
-        <a href="#" className="hover:underline">Mention légales & CGU</a>
-        <a href="#" className="hover:underline">Conditions générales de vente</a>
-        <a href="#" className="hover:underline">Charte de protection des données</a>
+        <a href="/mentions-legales" className="hover:underline">Mention légales & CGU</a>
+        <a href="/conditions-generales" className="hover:underline">Conditions générales de vente</a>
+        <a href="/charte-donnees" className="hover:underline">Charte de protection des données</a>
       </div>
     </footer>
   );

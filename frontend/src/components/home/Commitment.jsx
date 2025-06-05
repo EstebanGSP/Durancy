@@ -47,7 +47,7 @@ Des solutions concrètes pour réparer et sensibiliser à la réduction des déc
 
       {/* Bande d'éclairs sous les cartes */}
       <div
-        className="w-full py-36 -mt-8"
+        className="w-full py-36 -mt-8 opacity-0 sm:opacity-100"
         style={{
           backgroundImage: "url('/images/minieclairs.png')",
           backgroundRepeat: "repeat",

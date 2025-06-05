@@ -15,7 +15,7 @@ export default function RepairService() {
         >
           Voir les quartiers desservis
         </Link>
-        <div className="mt-8 w-full">
+        <div className="mt-8 -mr-8 w-full">
           <img
             src="/images/reparateur.png"
             alt="Réparateur Durancy"

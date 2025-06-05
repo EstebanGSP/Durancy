@@ -50,7 +50,9 @@ const CartItems = () => {
       ) : (
         cartItems.map((item) => (
           <div key={item.kit_id} className="flex items-center justify-between gap-4 border-b border-white pb-4">
-            <img src={item.image || "/images/placeholder.png"} alt={item.name} className="w-14 h-14 object-contain" />
+            <img src={`${process.env.REACT_APP_API_URL}/${item.image}`}
+                 alt={item.name} 
+                 className="w-14 h-14 object-contain" />
             <div className="flex-1">
               <h3 className="font-semibold text-sm">{item.name}</h3>
               <p className="text-xs text-purple-200">Qté : {item.quantity}</p>

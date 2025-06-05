@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// Extrait l'ID de la vidéo YouTube pour générer une miniature
+const getYoutubeThumbnail = (url) => {
+  const match = url.match(/(?:v=|\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null;
+};
+
 export default function RecentTutorials() {
   const [tutorials, setTutorials] = useState([]);
 
@@ -9,7 +15,10 @@ export default function RecentTutorials() {
     const fetchTutorials = async () => {
       try {
         const response = await axios.get("https://api.durancy.fr/tutorials");
-        setTutorials(response.data);
+        const sorted = response.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setTutorials(sorted.slice(0, 4));
       } catch (error) {
         console.error("Erreur lors de la récupération des tutoriels :", error);
       }
@@ -25,25 +34,27 @@ export default function RecentTutorials() {
 
         {/* Grid des cartes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {tutorials.slice(0, 4).map((tutorial) => (
-            <a
+          {tutorials.map((tutorial) => (
+            <Link
               key={tutorial.id}
-              href={tutorial.video_url}
-              target="_blank"
-              rel="noopener noreferrer"
+              to={`/tutoriels/${tutorial.id}`}
               className="bg-white shadow rounded-lg overflow-hidden transition-transform hover:scale-105 hover:shadow-lg"
             >
-              <div className="aspect-video bg-gray-100 flex items-center justify-center">
+              {getYoutubeThumbnail(tutorial.video_url) ? (
                 <img
-                  src="/images/youtubered.png"
-                  alt="Youtube preview"
-                  className="h-12 w-16"
+                  src={getYoutubeThumbnail(tutorial.video_url)}
+                  alt={tutorial.title}
+                  className="w-full h-40 object-cover"
                 />
-              </div>
+              ) : (
+                <div className="w-full h-40 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                  Vidéo non disponible
+                </div>
+              )}
               <div className="p-4 text-sm font-medium text-black">
                 {tutorial.title}
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 

@@ -3,6 +3,9 @@ import AccountLastAppointment from "./AccountLastAppointment";
 import AccountOrders from "./AccountOrders";
 import AccountRepairs from "./AccountRepairs";
 
+import { Link } from "react-router-dom";
+
+
 const AccountOverview = () => {
   const [user, setUser] = useState(null);
 
@@ -42,9 +45,12 @@ useEffect(() => {
           <p className="text-gray-700">01.02.03.04.05</p>
         </div>
         <div className="flex flex-col md:flex-row gap-3 md:items-center">
-          <button className="bg-purple-100 text-purple-700 px-4 py-2 rounded-md hover:bg-purple-200 transition">
+          <Link
+            to="/compte/modifier"
+            className="bg-purple-100 text-purple-700 px-4 py-2 rounded-md hover:bg-purple-200 transition inline-block text-center"
+          >
             Modifier le profil
-          </button>
+          </Link>
           <button className="border border-purple-400 text-purple-600 px-4 py-2 rounded-md hover:bg-purple-100 transition">
             Changer le mot de passe
           </button>

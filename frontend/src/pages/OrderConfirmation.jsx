@@ -79,7 +79,7 @@ const OrderConfirmation = () => {
             ) : (
               cartItems.map((item, i) => (
                 <div key={i} className="flex items-center justify-between gap-4 border-b pb-4">
-                  <img src={item.image || "/images/placeholder.png"} alt={item.name} className="w-14 h-14 object-contain" />
+                  <img src={`${process.env.REACT_APP_API_URL}/${item.image}`} alt={item.name} className="w-14 h-14 object-contain" />
                   <div className="flex-1">
                     <h3 className="font-semibold text-sm text-black">{item.name}</h3>
                     <p className="text-xs text-gray-500">Qté : {item.quantity}</p>

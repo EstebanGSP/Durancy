@@ -23,6 +23,10 @@ import RdvInfosPage from "./pages/RdvInfosPage.jsx";
 import KitProduct from "./pages/KitProduct.jsx";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderSuccess from "./pages/OrderSuccess";
+import EditProfile from "./pages/EditProfile";
+import MentionsLegales from "./pages/MentionsLegales";
+import ConditionsGenerales from "./pages/ConditionsGenerales";
+import CharteDonnees from "./pages/CharteDonnees";
 
 
 // Pages Admin à ajouter
@@ -50,13 +54,16 @@ function AppRoutes() {
       <Route path="/inscription" element={<RegisterPage />} />
       <Route path="/confirmation" element={<EmailConfirmationPage />} />
       <Route path="/compte" element={<AccountPage />} />
+      <Route path="/compte/modifier" element={<EditProfile />} />
       <Route path="/panier" element={<CartPage />} />
       <Route path="/rdv" element={<RepairRdvForm />} />
       <Route path="/rdv/infos" element={<RdvInfosPage />} />
       <Route path="/rdv/confirmation" element={<RepairConfirmation />} />
       <Route path="/panier/confirmation" element={<OrderConfirmation />} />
       <Route path="/panier/valide" element={<OrderSuccess />} />
-
+      <Route path="/mentions-legales" element={<MentionsLegales />} />
+      <Route path="/conditions-generales" element={<ConditionsGenerales />} />
+      <Route path="/charte-donnees" element={<CharteDonnees />} />
 
 
       {/* Page principale Admin (dashboard) */}

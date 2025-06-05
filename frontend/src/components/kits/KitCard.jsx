@@ -46,7 +46,7 @@ const KitCard = ({ kit }) => {
       <h3 className="font-bold text-sm mb-1">{kit.name}</h3>
       <p className="text-sm text-gray-600 mb-2 line-clamp-2">{kit.description}</p>
       <div className="flex justify-between items-center text-sm font-semibold">
-        <div className="text-yellow-500">★★★★★</div>
+        <div className="text-gray-300">★★★★★</div>
         <div>{Number(kit.price).toFixed(2)} €</div>
       </div>
     </div>

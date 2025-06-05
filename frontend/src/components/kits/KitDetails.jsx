@@ -48,7 +48,7 @@ const KitDetails = () => {
           {/* Image */}
           <div className="flex justify-center items-start">
             <img
-              src={kit.image}
+              src={`${process.env.REACT_APP_API_URL}/${kit.image}`}
               alt={kit.name}
               className="rounded-lg shadow-md max-h-[400px] object-contain"
             />
@@ -57,7 +57,7 @@ const KitDetails = () => {
           {/* Infos kit */}
           <div>
             <h1 className="text-3xl font-bold mb-4">{kit.name}</h1>
-            <p className="text-2xl text-purple-700 font-semibold mb-2">
+            <p className="text-2xl text-[#9B59B6] font-semibold mb-2">
               {Number(kit.price).toFixed(2)} €
             </p>
             <p className="text-green-600 font-medium mb-4">
@@ -66,7 +66,7 @@ const KitDetails = () => {
 
             <button
               onClick={handleAddToCart}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition"
+              className="bg-[#9B59B6] hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition"
             >
               Ajouter au panier
             </button>
