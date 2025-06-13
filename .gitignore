@@ -3,9 +3,8 @@ node_modules/
 
 # Builds
 frontend/build/
-backend/node_modules/
 
-*/.env
+
 
 
 
@@ -14,4 +13,3 @@ backend/node_modules/
 # Logs
 *.log
 
-/*/db
