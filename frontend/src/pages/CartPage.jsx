@@ -19,7 +19,7 @@ const CartPage = () => {
             <Step label="Commande terminée" />
           </div>
           <a href="/kits" className="text-sm text-purple-600 hover:underline">
-            ← Continuer vos achats
+            ← Continuer vos achats 
           </a>
         </div>
 
